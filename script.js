@@ -22,7 +22,6 @@ fetch("./texts.json")
 // checks the user typed character and displays accordingly
 const typeController = (e) => {
   const newLetter = e.key;
-
   // Handle backspace press
   if (newLetter == "Backspace") {
     userText = userText.slice(0, userText.length - 1);
@@ -46,6 +45,7 @@ const typeController = (e) => {
     display.innerHTML += `<span class="green">${newLetter === " " ? "▪" : newLetter}</span>`;
   } else {
     display.innerHTML += `<span class="red">${newLetter === " " ? "▪" : newLetter}</span>`;
+    totalError()
   }
 
   // check if given question text is equal to user typed text
@@ -54,6 +54,10 @@ const typeController = (e) => {
   }
 };
 
+// var errorN = 0;
+const totalError = () => {
+  errorCount = errorCount + 1;
+}
 const validate = (key) => {
   if (key === questionText[userText.length - 1]) {
     return true;
@@ -61,9 +65,12 @@ const validate = (key) => {
   return false;
 };
 
+
 // FINISHED TYPING
 const gameOver = () => {
   document.removeEventListener("keydown", typeController);
+  // errorCount = 0;
+
   // the current time is the finish time
   // so total time taken is current time - start time
   const finishTime = new Date().getTime();
@@ -82,7 +89,7 @@ const gameOver = () => {
   <div class="centered">
     <div class="resultContainer">
      <h1>Finished!</h1>
-     <p>You took: <span class="bold">${timeTaken}</span> seconds</p>
+     <p>You took: <span class="bold">${timeTaken.toFixed(0)}</span> seconds</p>
      <p>You made <span class="bold red">${errorCount}</span> mistakes</p>
      <button onclick="closeModal()">Close</button>
     </div>
@@ -93,7 +100,6 @@ const gameOver = () => {
 
   // restart everything
   startTime = null;
-  errorCount = 0;
   userText = "";
   display.classList.add("inactive");
 };
@@ -139,7 +145,7 @@ document.getElementById('starts').addEventListener('click', function () {
     const currentTime = new Date().getTime();
     const timeSpent = (currentTime - startTime) / 1000;
 
-    console.log('Started ')
+
 
     document.getElementById("show-time").innerHTML = `${currentTime ? timeSpent.toFixed(0) : 10} seconds`;
   })
