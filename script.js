@@ -124,16 +124,19 @@ const start = () => {
 };
 
 // START Countdown
-startBtn.addEventListener("click", start);
+document.getElementById('starts').addEventListener('click', function () {
+  // startBtn.addEventListener("click", start);
 
-// If history exists, show it
-displayHistory();
+  // If history exists, show it
+  displayHistory();
 
-// Show typing time spent
-setInterval(() => {
-  const currentTime = new Date().getTime();
-  const timeSpent = (currentTime - startTime) / 1000;
+  // Show typing time spent
+  setInterval(() => {
+    const currentTime = new Date().getTime();
+    const timeSpent = (currentTime - startTime) / 1000;
 
+    console.log('Started ')
 
-  document.getElementById("show-time").innerHTML = `${startTime ? timeSpent : 0} seconds`;
+    document.getElementById("show-time").innerHTML = `${currentTime ? timeSpent : 10} seconds`;
+  })
 }, 1000);
