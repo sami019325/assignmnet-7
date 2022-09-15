@@ -87,6 +87,7 @@ hr {
     background-color: rgb(255, 57, 57);
     padding: 10px 40px;
     border-radius: 20px;
+    text-align: center;
 }
 
 .linkRef a:hover {
